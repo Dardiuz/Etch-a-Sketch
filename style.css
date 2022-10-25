@@ -1,0 +1,13 @@
+.container {
+  width: 460px;
+}
+
+.grid-row {
+  display: flex;
+  /* justify-content: center; */
+}
+
+.grid-box {
+  border: 1px solid black;
+  background-color: #f8f8ff;
+}
