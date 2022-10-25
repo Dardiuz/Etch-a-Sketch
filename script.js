@@ -1,13 +1,16 @@
-const sizeOfGrid = 16;
 const container = document.querySelector(".container");
+const resetButton = document.querySelector(".reset-page");
 
 const createGrid = (amtOfGrids) => {
+  const wrapper = document.createElement("div");
+  wrapper.classList.add("wrapper");
+
   for (let i = 0; i < amtOfGrids; i++) {
     const row = document.createElement("div");
     row.classList.add("grid-row");
 
     for (let j = 0; j < amtOfGrids; j++) {
-      const widthAndHeight = 460 / sizeOfGrid;
+      const widthAndHeight = 460 / amtOfGrids;
       const gridBox = document.createElement("div");
       gridBox.classList.add("grid-box");
       gridBox.style.width = `${widthAndHeight}px`;
@@ -18,8 +21,25 @@ const createGrid = (amtOfGrids) => {
       });
       row.appendChild(gridBox);
     }
-    container.appendChild(row);
+    wrapper.appendChild(row);
   }
+  container.appendChild(wrapper);
 };
 
-createGrid(sizeOfGrid);
+resetButton.addEventListener("click", () => {
+  let userSize = Number(
+    prompt("Select a number for the dimension of the grid")
+  );
+
+  while (userSize > 100) {
+    userSize = Number(prompt("Select a dimension for the grid below a 100"));
+  }
+  const wrapper = document.querySelector(".wrapper");
+
+  if (!wrapper) {
+    createGrid(userSize);
+  } else {
+    wrapper.remove();
+    createGrid(userSize);
+  }
+});
